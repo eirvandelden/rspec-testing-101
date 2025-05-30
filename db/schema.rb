@@ -20,7 +20,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_19_141450) do
   create_table "player_characters", force: :cascade do |t|
     t.string "name"
     t.string "player"
-    t.integer "character_class_id", null: false
+    t.string "distance"
+    t.integer "ally_id"
+    t.integer "health", default: 100
+    t.integer "character_class_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["character_class_id"], name: "index_player_characters_on_character_class_id"

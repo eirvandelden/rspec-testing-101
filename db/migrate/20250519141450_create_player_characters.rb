@@ -3,7 +3,10 @@ class CreatePlayerCharacters < ActiveRecord::Migration[8.0]
     create_table :player_characters do |t|
       t.string :name
       t.string :player
-      t.references :character_class, null: false, foreign_key: true
+      t.string :distance
+      t.integer :ally_id, null: true
+      t.integer :health, default: 100
+      t.references :character_class, foreign_key: true
 
       t.timestamps
     end
