@@ -17,7 +17,7 @@ RSpec.describe PlayerCharacter do
 
     context "and wants to play seriously" do
       let(:character_name) { "Lord Ardeth de Tylmarande" }
-      subject { player_character.name }
+      subject { valid_character.name }
 
       it { is_expected.to eq character_name }
     end
