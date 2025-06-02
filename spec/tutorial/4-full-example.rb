@@ -15,38 +15,40 @@ RSpec.describe "Deekins combat strategy" do
   end
   let(:ally) { PlayerCharacter.find_or_create_by health: ally_health, distance: ally_distance }
 
-  subject { deekin.next_action }
+  describe "#next_action" do
+    subject { deekin.next_action }
 
-  context "when an Enemy is within reach" do
-    context "with an Ally within reach" do
-      let(:ally_distance) { "near" }
+    context "when an Enemy is within reach" do
+      context "with an Ally within reach" do
+        let(:ally_distance) { "near" }
 
-      context "and that ally is below 50% health" do
-        let(:ally_health) { 49 }
+        context "and that ally is below 50% health" do
+          let(:ally_health) { 49 }
 
-        it { is_expected.to eq(:healing_word) }
+          it { is_expected.to eq(:healing_word) }
+        end
+
+        context "and that ally is healthy" do
+          let(:ally_health) { 100 }
+
+          it { is_expected.to eq(:melee_attack) }
+        end
       end
 
-      context "and that ally is healthy" do
-        let(:ally_health) { 100 }
+      context "without an Ally within reach" do
+        let(:ally_distance) { "far" }
 
-        it { is_expected.to eq(:melee_attack) }
-      end
-    end
+        context "and that ally is below 50% health" do
+          let(:ally_health) { 49 }
 
-    context "without an Ally within reach" do
-      let(:ally_distance) { "far" }
+          it { is_expected.to eq(:move) }
+        end
 
-      context "and that ally is below 50% health" do
-        let(:ally_health) { 49 }
+        context "and that ally is healthy" do
+          let(:ally_health) { 100 }
 
-        it { is_expected.to eq(:move) }
-      end
-
-      context "and that ally is healthy" do
-        let(:ally_health) { 100 }
-
-        it { is_expected.to eq(:melee_attack) }
+          it { is_expected.to eq(:melee_attack) }
+        end
       end
     end
   end
