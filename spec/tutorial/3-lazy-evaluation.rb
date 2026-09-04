@@ -2,9 +2,12 @@ require 'rails_helper'
 
 # We can create lazy evaluated objects that get a value when they are used within a test
 RSpec.describe PlayerCharacter do
+  subject(:valid_character) { described_class.new name: character_name, player: player }
+
   let(:player) { "Etienne" }
   let(:character_name) { "Rothyrn" }
-  subject(:valid_character) { described_class.new name: character_name, player: player }
+
+
 
   context "when Etienne is playing a character" do
     context "and wants to play comedic relief" do
@@ -16,8 +19,11 @@ RSpec.describe PlayerCharacter do
     end
 
     context "and wants to play seriously" do
-      let(:character_name) { "Lord Ardeth de Tylmarande" }
       subject { valid_character.name }
+
+      let(:character_name) { "Lord Ardeth de Tylmarande" }
+
+
 
       it { is_expected.to eq character_name }
     end
