@@ -16,5 +16,6 @@ end
   { name: "Deekin Scalesinger", player: "Etienne", character_class: "Bard" },
   { name: "Rothyrn", player: "Etienne", character_class: "Assassin" },
   { name: "Lord Ardeth de Tylmarande", character_class: "Blackguard", player: "Etienne" } ].each do |character_data|
-  PlayerCharacter.find_or_create_by!(name: character_data[:name], player: character_data[:player], character_class: CharacterClass.find_by(name: character_data[:character_class]))
+  PlayerCharacter.find_or_create_by!(name: character_data[:name], player: character_data[:player],
+character_class: CharacterClass.find_by(name: character_data[:character_class]))
 end
