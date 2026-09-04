@@ -1,8 +1,15 @@
-# Omakase Ruby styling for Rails
-inherit_gem: { rubocop-rails-omakase: rubocop.yml }
+---
+# The rules shared by every personal Ruby project. This is a Rails app whose tests are specs,
+# so it stacks those two layers on top.
+inherit_gem:
+  rubocop-eirvandelden:
+    - config/default.yml
+    - config/rails.yml
+    - config/rspec.yml
 
-# Overwrite or add rules to create your own house style
-#
-# # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
-# Layout/SpaceInsideArrayLiteralBrackets:
-#   Enabled: false
+# The numbered files under spec/tutorial are lessons, not specs: they are deliberately not named
+# _spec.rb so they never run, and several demonstrate shapes to avoid — 6-instance-variable-leakage
+# exists precisely to show one. Holding them to the rules would erase what they teach.
+AllCops:
+  Exclude:
+    - "spec/tutorial/**/*"
